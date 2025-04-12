@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Rebrickable Parts Extractor",
+  "version": "1.0",
+  "description": "Extract parts information from Rebrickable website",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "host_permissions": [
+    "*://*.rebrickable.com/*",
+    "*://cdn.rebrickable.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.rebrickable.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
