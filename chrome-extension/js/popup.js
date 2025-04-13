@@ -57,16 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const modelName = mocMatch ? mocMatch[3].replace(/-/g, '_') : 'unknown';
 
     const csvContent = [
-      ['零件编号', '数量', '零件名称', '零件分类', '颜色', '图片链接'].join(
+      ['零件编号', '数量', '颜色', '零件名称', '零件分类', '图片链接'].join(
         ','
       ),
       ...partsData.map((part) =>
         [
           part.partId,
           part.quantity,
+          `"${part.colorName}"`,
           `"${part.partName}"`,
           `"${part.category}"`,
-          `"${part.colorName}"`,
           part.imageUrl,
         ].join(',')
       ),
@@ -105,9 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <tr>
           <th>零件编号</th>
           <th>数量</th>
+          <th>颜色</th>
           <th>零件名称</th>
           <th>零件分类</th>
-          <th>颜色</th>
           <th>图片</th>
         </tr>
       </thead>
@@ -118,9 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <tr>
             <td>${part.partId}</td>
             <td>${part.quantity}</td>
+            <td>${part.colorName}</td>
             <td>${part.partName}</td>
             <td>${part.category}</td>
-            <td>${part.colorName}</td>
             <td>
               ${
                 part.imageUrl
