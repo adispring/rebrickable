@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveBtn = document.getElementById('saveBtn');
   const previewContainer = document.getElementById('previewContainer');
   const tableContainer = document.getElementById('tableContainer');
+  const statsContainer = document.getElementById('statsContainer');
 
   let partsData = [];
 
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (response && response.parts) {
                 partsData = response.parts;
                 displayTable(partsData);
+                displayStats(partsData);
                 previewContainer.style.display = 'block';
               }
             }
@@ -55,16 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const modelName = mocMatch ? mocMatch[3].replace(/-/g, '_') : 'unknown';
 
     const csvContent = [
-      ['零件编号', '零件名称', '零件分类', '颜色', '数量', '图片链接'].join(
+      ['零件编号', '数量', '零件名称', '零件分类', '颜色', '图片链接'].join(
         ','
       ),
       ...partsData.map((part) =>
         [
           part.partId,
+          part.quantity,
           `"${part.partName}"`,
           `"${part.category}"`,
           `"${part.colorName}"`,
-          part.quantity,
           part.imageUrl,
         ].join(',')
       ),
@@ -78,16 +80,34 @@ document.addEventListener('DOMContentLoaded', () => {
     link.click();
   });
 
+  function displayStats(parts) {
+    const uniqueParts = new Set(
+      parts.map((part) => `${part.partId}_${part.colorName}`)
+    ).size;
+
+    const totalParts = parts.reduce(
+      (sum, part) => sum + parseInt(part.quantity),
+      0
+    );
+
+    statsContainer.innerHTML = `
+      <div class="stats">
+        <div>零件种类数：${uniqueParts}（包含不同颜色）</div>
+        <div>零件总数：${totalParts}</div>
+      </div>
+    `;
+  }
+
   function displayTable(parts) {
     const table = document.createElement('table');
     table.innerHTML = `
       <thead>
         <tr>
           <th>零件编号</th>
+          <th>数量</th>
           <th>零件名称</th>
           <th>零件分类</th>
           <th>颜色</th>
-          <th>数量</th>
           <th>图片</th>
         </tr>
       </thead>
@@ -97,10 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
             (part) => `
           <tr>
             <td>${part.partId}</td>
+            <td>${part.quantity}</td>
             <td>${part.partName}</td>
             <td>${part.category}</td>
             <td>${part.colorName}</td>
-            <td>${part.quantity}</td>
             <td>
               ${
                 part.imageUrl
