@@ -51,6 +51,3 @@ csv 名称为网址中的 MOC 编号，例如：
 `https://rebrickable.com/mocs/MOC-13349/Nico71/compact-tracked-loader/#parts`
 
 csv 名称为：MOC-13349_compact-tracked-loader.csv
-
-
-

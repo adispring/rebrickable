@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>淘宝购物车数据提取器</title>
+    <link rel="stylesheet" href="css/popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>淘宝购物车数据提取器</h1>
+      <div id="currentTime"></div>
+      <div id="fileName"></div>
+      <button id="extractBtn">提取商品信息</button>
+      <div id="previewContainer" style="display: none">
+        <div id="statsContainer" class="stats-container">
+          <div class="total-price">
+            总价: <span id="totalPrice">0.00</span> 元
+          </div>
+        </div>
+        <h2>预览</h2>
+        <div id="tableContainer"></div>
+        <button id="saveBtn">保存为 CSV</button>
+      </div>
+    </div>
+    <script src="js/popup.js"></script>
+  </body>
+</html>
