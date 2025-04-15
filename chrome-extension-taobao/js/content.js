@@ -76,8 +76,8 @@ function extractProductInfo() {
       );
       const title = titleElem?.title || titleElem?.textContent || '';
 
-      // 使用正则表达式提取编号
-      const idMatch = title.match(/适用乐高(\d+)/);
+      // 使用正则表达式提取编号，允许"适用乐高"和数字之间有空格
+      const idMatch = title.match(/适用乐高\s*(\d+)/);
       const id = idMatch ? idMatch[1] : '';
 
       // 如果没有找到编号，说明不是乐高商品，跳过
