@@ -78,10 +78,12 @@ function extractProductInfo() {
 
       // 使用正则表达式提取编号，允许"适用乐高"和数字之间有空格
       const idMatch = title.match(/适用乐高\s*(\d+)/);
-      const id = idMatch ? idMatch[1] : '';
+      let id = idMatch ? idMatch[1] : '';
 
-      // 如果没有找到编号，说明不是乐高商品，跳过
-      if (!id) return;
+      // 如果没有找到编号，则使用名称作为编号
+      if (!id) {
+        id = title.trim();
+      }
 
       // 获取颜色信息
       const colorElem = card.querySelector(
